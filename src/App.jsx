@@ -80,25 +80,38 @@ export default function App() {
 
   // HARDWARE NATIVO: Capturar GPS (@capacitor/geolocation)
   async function capturarLocalizacaoGPS() {
-    setBuscandoGps(true);
-    setMensagem({ tipo: '', texto: '' });
-    try {
-      const pos = await Geolocation.getCurrentPosition({
-        enableHighAccuracy: true,
-        timeout: 10000
-      });
-      setCoords({
-        lat: pos.coords.latitude.toFixed(6),
-        lng: pos.coords.longitude.toFixed(6)
-      });
-    } catch (err) {
+  setBuscandoGps(true);
+  setMensagem({ tipo: '', texto: '' });
+  try {
+    // Solicita permissão nativa no Android antes de ler o GPS
+    const permissao = await Geolocation.requestPermissions();
+    if (permissao.location === 'denied') {
       setMensagem({
         tipo: 'erro',
-        texto: 'Não foi possível obter o GPS. Verifique se a localização está ativada.'
+        texto: 'Permissão de localização negada nas configurações do celular.'
       });
+      setBuscandoGps(false);
+      return;
     }
-    setBuscandoGps(false);
+
+    const pos = await Geolocation.getCurrentPosition({
+      enableHighAccuracy: false,
+      timeout: 15000,
+      maximumAge: 10000
+    });
+
+    setCoords({
+      lat: pos.coords.latitude.toFixed(6),
+      lng: pos.coords.longitude.toFixed(6)
+    });
+  } catch (err) {
+    setMensagem({
+      tipo: 'erro',
+      texto: 'Erro ao obter GPS: ' + (err?.message || 'Ative o GPS do celular.')
+    });
   }
+  setBuscandoGps(false);
+}
 
   // CREATE: Salvar nova vaga livre no Supabase
   async function salvarVaga(e) {

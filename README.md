@@ -1,16 +1,12 @@
-# React + Vite
+# EstacionaFácil Vagas (`mvp-aluno13-estacionafacil`)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. Problema Real (Situação-Problema)
+Motoristas perdem tempo circulando em horários de pico procurando vagas livres próximas às instituições de ensino e comércio.
 
-Currently, two official plugins are available:
+## 2. Hardware Nativo (Capacitor)
+- **GPS:** `@capacitor/geolocation`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 3. Jornada de Telas (Mobile-First)
+1. **Tela 01:** Login / Cadastro rápido (Supabase Auth)
+2. **Tela 02:** Vagas Sinalizadas Agora (Feed em tempo real)
+3. **Tela 03:** Marcar Vaga Livre com GPS
